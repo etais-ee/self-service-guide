@@ -24,7 +24,7 @@ ETAIS self-service portal is based on [Waldur](https://waldur.com) cloud brokera
 [docs.waldur.com](http://docs.waldur.com). Below are key aspects adapted for ETAIS deployment.
 
 
-### Workspaces
+## Workspaces
 ETAIS self-service is built around the concept of workspaces. Workspace defines structural context for the 
 user. Each workspace type shows information and possible actions relevant to the user in a certain role.
 There are several workspace types available in the system:
@@ -33,7 +33,7 @@ There are several workspace types available in the system:
 * [Project workspace](#project workspace)
 * [User workspace](#user workspace)
 
-### Roles
+## Roles
 Users are connected to the organizations and their projects through roles. Users may have several roles, specific to each workspace they have been credited access to. Currently the following roles are available in the system:
 
 * Organization owners (owners)
@@ -42,24 +42,33 @@ Users are connected to the organizations and their projects through roles. Users
 
 User roles are hierarchical in a way that organization owners can do everything that project managers and system administrators can do.
 
-#### Organization Owners
+### Organization Owners
 * Can access organization workspace.
 * Can invite other users to participate in the organization.
 * Can create and manage projects, including policies and cost limitations.
 * Can manage resource providers and set their availability within projects.
 * Can do everything that project managers and system administrators can do.
 
-#### Project Managers
+### Project Managers
 * Can access project workspace when appointed by organization owner.
 * Can manage project team from the users already connected to the organization.
 * Can do everything that system administrators can do.
 
-#### System Administrators
-* Can access project workspace if appointed by organization owner or project manager.
-* Can provision resources from Service Store within limits set by organization owner.
-* Can manage provisioned cloud resources.
-  
-### Service Store
+### System Administrators
+* Can access project workspace if appointed by organization owner or project manager
+* Can provision and manage cloud resources
+
+## Accounts
+
+ETAIS self-service portal supports user accounts coming from [TaaT](http://taat.edu.ee) federated identity system,
+which allows to use home organisation accounts for login. Most of the larger education and research institutions in
+Estonia are connected to TaaT already.
+
+Alternatively, one can login using account from [eduGAIN](https://www.geant.org/Services/Trust_identity_and_security/eduGAIN).
+
+Self-Service Portal is available from: [https://minu.etais.ee](https://minu.etais.ee)
+
+## Service Store
 
 Service Store provides a common way to provision resources from both shared and private service providers.
 
@@ -70,28 +79,16 @@ The following resource types are offered at the moment:
 * Block Devices (requires pre-provisioned VPC) - persistent volumes for storage of the data.
 * Batch (TBD) - access to Slurm-based processing farms.
 
-#### VPC Details
-* Virtual Private Cloud aka VPC is a compute service that allows to procure and manage a pool of virtualized infrastructure
+### VPC Details
+* Virtual Private Cloud (VPC) is a compute service that allows procuring and managing a pool of virtualized infrastructure
 resources - like RAM, CPU, storage volumes and network resources - required to run virtual machines.
 * VPC package does not limit VM count - it depends on VM flavors used and total resources available in a chosen package.
 * VPC packages can be upgraded and downgraded at any moment.
 * VPC packages are accounted daily based on the price of the largest resource package that was selected during the day.
 
-## Accounts
-
-ETAIS self-service portal supports user accounts coming from [TaaT](http://taat.edu.ee) federated identity system,
-which allows to use home organisation accounts for login. Most of the larger education and research institutions in
-Estonia are connected to TaaT already.
-
-Alternatively, one can login using account from [eduGAIN](https://www.geant.org/Services/Trust_identity_and_security/eduGAIN).
-
-
-Self-Service Portal is available from: [https://minu.etais.ee](https://minu.etais.ee)
-
-
 ![Login](images/login.png)
 
-> *Users need to accept Terms of Service presented on the first login for account activation!*
+> *NB! Users need to accept Terms of Service presented on the first login for account activation!*
 
 ## User workspace
 User workspace is a personal account profile management space, presented after first login. It allows to configure user notifications, SSH public keys, update personal profile data, etc. 
@@ -149,11 +146,11 @@ Projects can be added by selecting "Projects" from the menu and clicking on "Add
 
 ![Create project form](images/project-add-form.png)
 
-### Inviting and accrediting users
+### Inviting a user
 User workspace access and role management can be done on two separate levels:
 
-* Organization workspace allows owners to invite and accredit users as organization members and to manage their project/role assignment(s)
-* Project workspace allows project managers to select users from available organization members into project team and to assign a project role 
+* Organization workspace allows owners to invite users as organization members and to manage their project role assignments.
+* Project workspace allows project managers to assign available organization members a role in their project.
 
 Organization invites can be created by selecting "Team" from the organization workspace menu and clicking on "Invitations" management tab.
 
@@ -170,10 +167,59 @@ For creating a new invitation please click on "Invite user" button.
 ![Invite creation form](images/org-team-invite-form.png)
 
 ## Project workspace
-Project workspace provides tools and information required for day-to-day work and oversight over the managed IT infrastructure. Access is done via a workspace selector in the top section of the user interface.
+Project workspace provides tools and information required for day-to-day work and oversight over the managed IT infrastructure. Access is done via workspace selector in top section of user interface.
 
 ![Project workspace](images/project-dashboard.png)
 
+Menu entries available within project dashboard:
+
+* **Dashboard**: overview of project resources and latest events
+* **Service store**: catalog of resources and providers, available for provisioning
+* **Resources**: provisioned resource listings and management views by resource category (VMs, Private Clouds, Storage, etc.)
+* **Audit logs**: event logs related to project and its resources
+* **Team**: project team management
+
 ### Adding a VPC
+Virtual Private Cloud resource package can be added by selecting "Resources" and "Private Clouds" from the menu and clicking on "Add private cloud" button.
+
+![Add VPC](images/project-vpc-add.png)
+
+> *NB! There are several Virtual Private Cloud providers available from the Service Store. You need to provision at least one VPC package from suitable provider in order to be able to create virtual machines.*
+
+![Selecting VPC provider](images/project-vpc-add-provider-select.png)
+
+![Adding VPC provider - step 1](images/project-vpc-add-form-step1.png)
+
+![Adding VPC provider - step 2](images/project-vpc-add-form-step2.png)
+
+![Adding VPC provider - step 3](images/project-vpc-add-form-step3.png)
+
 ### Adding a VM
-### Security Groups management
+
+![Adding VM - step 1](images/project-vm-add-form-step1.png)
+
+![Adding VM - step 2](images/project-vm-add-form-step2.png)
+
+![Adding VM - step 3](images/project-vm-add-form-step3.png)
+
+![Adding VM - step 4](images/project-vm-add-form-step4.png)
+
+![Adding VM - step 5](images/project-vm-add-form-step5.png)
+
+![Adding VM - step 6](images/project-vm-add-form-step6.png)
+
+![Adding VM - step 7](images/project-vm-add-form-step7.png)
+
+![Adding VM - step 8](images/project-vm-add-form-step8.png)
+
+![Adding VM - step 9](images/project-vm-add-form-step9.png)
+
+### VPC Security Groups management
+
+![Creating SecGroup - step 1](images/project-vpc-details.png)
+
+![Creating SecGroup - step 2](images/project-vpc-secgroups.png)
+
+![Creating SecGroup - step 3](images/project-vpc-secgroups-create.png)
+
+![Creating SecGroup - step 4](images/project-vpc-secgroups-form.png)
