@@ -23,6 +23,36 @@ actions of users connected to it in different [roles](#roles).
 ETAIS self-service portal is based on [Waldur](https://waldur.com) cloud brokerage platform. The latest documentation is available from
 [docs.waldur.com](http://docs.waldur.com). Below are key aspects adapted for ETAIS deployment.
 
+## Service Store
+
+Service Store provides a common way to provision resources from both shared and private service providers.
+
+The following resource types are offered at the moment:
+
+* Virtual Private Cloud (VPC) - a pool of resources dedicated to a particular organization.
+* Virtual Machines (requires pre-provisioned VPC) - a server with network connectivity for running customer payloads.
+* Block Devices (requires pre-provisioned VPC) - persistent volumes for storage of the data.
+* Batch (TBD) - access to Slurm-based processing farms.
+
+### VPC Details
+* Virtual Private Cloud (VPC) is a compute service that allows procuring and managing a pool of virtualized infrastructure
+resources - like RAM, CPU, storage volumes and network resources - required to run virtual machines.
+* VPC package does not limit VM count - it depends on VM flavors used and total resources available in a chosen package.
+* VPC packages can be upgraded and downgraded at any moment.
+* VPC packages are accounted daily based on the price of the largest resource package that was selected during the day.
+
+## User accounts
+ETAIS self-service portal supports user accounts coming from [TaaT](http://taat.edu.ee) federated identity system,
+which allows to use home organisation accounts for login. Most of the larger education and research institutions in
+Estonia are connected to TaaT already.
+
+Alternatively, one can login using an account from [eduGAIN](https://www.geant.org/Services/Trust_identity_and_security/eduGAIN).
+
+Self-Service Portal is available from: [https://minu.etais.ee](https://minu.etais.ee)
+
+![Login](images/login.png)
+
+> *NB! Users need to accept Terms of Service presented on the first login for account activation!*
 
 ## Workspaces
 ETAIS self-service is built around the concept of workspaces. Workspace defines structural context for the 
@@ -34,7 +64,8 @@ There are several workspace types available in the system:
 * [User workspace](#user workspace)
 
 ## Roles
-Users are connected to the organizations and their projects through roles. Users may have several roles, specific to each workspace they have been credited access to. Currently the following roles are available in the system:
+Users are connected to the organizations and their projects through roles. Users may have several roles, specific to
+each workspace they have access to. Currently the following roles are available in the system:
 
 * Organization owners (owners)
 * Project managers (managers)
@@ -55,49 +86,18 @@ User roles are hierarchical in a way that organization owners can do everything 
 * Can do everything that system administrators can do.
 
 ### System Administrators
-* Can access project workspace if appointed by organization owner or project manager
-* Can provision and manage cloud resources
-
-## Accounts
-
-ETAIS self-service portal supports user accounts coming from [TaaT](http://taat.edu.ee) federated identity system,
-which allows to use home organisation accounts for login. Most of the larger education and research institutions in
-Estonia are connected to TaaT already.
-
-Alternatively, one can login using account from [eduGAIN](https://www.geant.org/Services/Trust_identity_and_security/eduGAIN).
-
-Self-Service Portal is available from: [https://minu.etais.ee](https://minu.etais.ee)
-
-## Service Store
-
-Service Store provides a common way to provision resources from both shared and private service providers.
-
-The following resource types are offered at the moment:
-
-* Virtual Private Cloud (VPC) - a pool of resources dedicated to a particular organization.
-* Virtual Machines (requires pre-provisioned VPC) - a server with network connectivity for running customer payloads.
-* Block Devices (requires pre-provisioned VPC) - persistent volumes for storage of the data.
-* Batch (TBD) - access to Slurm-based processing farms.
-
-### VPC Details
-* Virtual Private Cloud (VPC) is a compute service that allows procuring and managing a pool of virtualized infrastructure
-resources - like RAM, CPU, storage volumes and network resources - required to run virtual machines.
-* VPC package does not limit VM count - it depends on VM flavors used and total resources available in a chosen package.
-* VPC packages can be upgraded and downgraded at any moment.
-* VPC packages are accounted daily based on the price of the largest resource package that was selected during the day.
-
-![Login](images/login.png)
-
-> *NB! Users need to accept Terms of Service presented on the first login for account activation!*
+* Can access project workspace if appointed by organization owner or project manager.
+* Can provision and manage cloud resources.
 
 ## User workspace
-User workspace is a personal account profile management space, presented after first login. It allows to configure user notifications, SSH public keys, update personal profile data, etc. 
+User workspace is a personal profile management space. It allows to configure user notifications,
+SSH public keys, update personal profile data etc.
 
 ![User workspace](images/user-dashboard.png)
 
 Menu entries available within user workspace:
 
-* **Dashboard**: listing all organizations and their projects where user is participating, in appointed roles
+* **Dashboard**: listing all organizations and projects where user is participating
 * **Audit logs**: listing events related to user
 * **SSH keys**: managing public SSH keys for the user
 * **Notifications**: managing notifications for the user
@@ -160,14 +160,15 @@ For creating a new invitation please click on "Invite user" button.
 
 ![Creating an invite](images/org-team-invite-create.png)
 
-> *NB! By sending an invite to a user you also accredit this user to become an organization member! In order to complete the joining process target user needs to login with the URL provided in the invitation.*  
+> *NB! By sending an invite to a user you also accredit this user to become an organization member! In order to complete
+the joining process invited user needs to login with the URL provided in the invitation email.*  
 
 "Invite user" form requires target user email address, initial project and role selection. Submit form by clicking on "Invite user" button.
 
 ![Invite creation form](images/org-team-invite-form.png)
 
 ## Project workspace
-Project workspace provides tools and information required for day-to-day work and oversight over the managed IT infrastructure. Access is done via workspace selector in top section of user interface.
+Project workspace provides tools and information required for day-to-day work and oversight over the managed IT infrastructure. Access is done via workspace selector in the top section of user interface.
 
 ![Project workspace](images/project-dashboard.png)
 
@@ -184,7 +185,8 @@ Virtual Private Cloud resource package can be added by selecting "Resources" and
 
 ![Add VPC](images/project-vpc-add.png)
 
-> *NB! There are several Virtual Private Cloud providers available from the Service Store. You need to provision at least one VPC package from suitable provider in order to be able to create virtual machines.*
+> *NB! There are several Virtual Private Cloud providers available from the Service Store. You need to provision at least one VPC package
+from suitable provider in order to be able to create virtual machines.*
 
 ![Selecting VPC provider](images/project-vpc-add-provider-select.png)
 
