@@ -10,7 +10,7 @@ minimise bureaucracy of negotiating access, quotas and payments.
 
 The main concepts are as follows:
 
-![Overview](images/etais-structure.svg)
+![Overview](images/etais-structure.png)
 
 * **Organization** is a standalone entity that represents a research group or a company. Organization is responsible for the 
 actions of users connected to it in different [roles](#roles).
