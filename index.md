@@ -10,9 +10,9 @@ Usually, each organization has multiple projects, and each project has multiple 
 ### Workspaces
 Workspaces define and limit structural context for the user. They also implement management views and enforce access rights, depending on the user role attached. There are several workspace types available in the system:
 
-* [Organization workspace](#organization workspace)
-* [Project workspace](#project workspace)
-* [User (profile) workspace](#user workspace)
+* [Organization workspace](#organization-workspace)
+* [Project workspace](#project-workspace)
+* [User (profile) workspace](#user-workspace)
 
 ### Roles
 Users are connected to the organizations and their projects through roles. Users may have several roles, specific to each workspace they have been credited access to. Currently the following roles are available in the system:
@@ -64,7 +64,7 @@ Self-Service Portal is available from: [https://minu.etais.ee](https://minu.etai
 
 ![Login](images/login.png)
 
-> *Users need to accept Terms of Service presented on the first login for account activation!*
+> *NB! Users need to accept Terms of Service presented on the first login for account activation!*
 
 ## User workspace
 User workspace is a personal account profile management space, presented after first login. It allows to configure user notifications, SSH public keys, update personal profile data, etc. 
@@ -143,7 +143,7 @@ For creating a new invitation please click on "Invite user" button.
 ![Invite creation form](images/org-team-invite-form.png)
 
 ## Project workspace
-Project workspace provides tools and information required for day-to-day work and oversight over the managed IT infrastructure. Access is done via a workspace selector in the top section of the user interface.
+Project workspace provides tools and information required for day-to-day work and oversight over the managed IT infrastructure. Access is done via workspace selector in top section of user interface.
 
 ![Project workspace](images/project-dashboard.png)
 
