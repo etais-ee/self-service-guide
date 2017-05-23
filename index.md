@@ -1,63 +1,90 @@
 # Self-Service User Guide
 
 ## Overview
-Self-Service Portal implements One-Stop-Shop for users in order to procure and manage cloud based resources delivered from multiple providers. It also enables users to participate in multiple roles, linked to multiple structural units, like organizations and their projects. For example, single user can act as Organization-A owner and also as Organization-B Project-X system administrator. Switching structual contexts and user roles is based on workspaces concept. 
-![Overview](images/homeport-interactions.png)
+ETAIS self-service portal is a single entry point for provisioning and managing computational and storage resources
+shared by ETAIS consortium members - UT, TTU, NICPB and HITSA - as well as public cloud providers. It is aimed at
+research groups affiliated with Estonian research and development institutions from both public and private sector.
 
-Usually, each organization has multiple projects, and each project has multiple resources, managed by multiple users in different roles. Organizations are also structural units who can receive and pay resource usage bills. Projects are Organization sub-containers for grouping together provisioned resources, managing users and project level policies -- as a dedicated project workspace. Resource providers are managed at organization level and can be made available within multiple projects.
+Self-service portal offers research groups a way to collaborate on using and sharing research infrastructure to
+minimise bureaucracy of negotiating access, quotas and payments.
+
+The main concepts are as follows:
+
+![Overview](images/etais-structure.png)
+
+* **Organization** is a standalone entity that represents a research group or a company. Organization is responsible for the 
+actions of users connected to it in different [roles](#roles).
+* **Project** is an entity within an organization that aggregates and isolates teams and resources.
+* **Provider** is an entity that represents account in an external service provider.
+  * **Private providers** - providers that are available and manageable within a specific organization.
+  * **Shared providers** - global providers that are available for all organizations. This includes HPC, cloud and storage infrastructure from ETAIS consortium.
+* **Resource** - an entity within a project and a provider. Represents cloud resource. Examples: virtual machine or volume in OpenStack, quota in batch processing queue.
+
+ETAIS self-service portal is based on [Waldur](https://waldur.com) cloud brokerage platform. The latest documentation is available from
+[docs.waldur.com](http://docs.waldur.com). Below are key aspects adapted for ETAIS deployment.
 
 
 ### Workspaces
-Workspaces define and limit structural context for the user. They also implement management views and enforce access rights, depending on the user role attached. There are several workspace types available in the system:
+ETAIS self-service is built around the concept of workspaces. Workspace defines structural context for the 
+user. Each workspace type shows information and possible actions relevant to the user in a certain role.
+There are several workspace types available in the system:
 
 * [Organization workspace](#organization workspace)
 * [Project workspace](#project workspace)
-* [User (profile) workspace](#user workspace)
+* [User workspace](#user workspace)
 
 ### Roles
 Users are connected to the organizations and their projects through roles. Users may have several roles, specific to each workspace they have been credited access to. Currently the following roles are available in the system:
 
-* Organization owners (owner)
-* Project managers (manager)
-* System administators (admin)
+* Organization owners (owners)
+* Project managers (managers)
+* System administrators (admins)
 
-User roles are hierarchical - ie organization owners can do everything that project managers and system administrators can do.
+User roles are hierarchical in a way that organization owners can do everything that project managers and system administrators can do.
 
 #### Organization Owners
-* Can access organization workspace
-* Can invite and accredit other users to participate in the Organization (ie to become an organization member)
-* Can manage organization members access to project workspaces 
-* Can manage projects
-* Can manage resource providers and set their availability within projects
-* Can order resources from Service Store
-* Can do everything that project managers and system administrators can do
+* Can access organization workspace.
+* Can invite other users to participate in the organization.
+* Can create and manage projects, including policies and cost limitations.
+* Can manage resource providers and set their availability within projects.
+* Can do everything that project managers and system administrators can do.
 
 #### Project Managers
-* Can access project workspace if appointed by organization owner
-* Can manage project team, limited to organization Members
-* Can order resources from Service Store
-* Can do everything that system administrators can do
+* Can access project workspace when appointed by organization owner.
+* Can manage project team from the users already connected to the organization.
+* Can do everything that system administrators can do.
 
 #### System Administrators
-* Can access project workspace if appointed by organization owner or project manager
-* Can provision and manage cloud resources within the limits of resource pools ordered by organization owners or project managers
+* Can access project workspace if appointed by organization owner or project manager.
+* Can provision resources from Service Store within limits set by organization owner.
+* Can manage provisioned cloud resources.
   
 ### Service Store
-Brokered services are enlisted in the Service Store catalog, made available for browsing and resource provisioning.  
 
-#### VPC Service
-* Virtual Private Cloud aka VPC is a compute service that allows to procure and manage a pool of virtualized infrastructure resources - like RAM, CPU, storage volumes and network resources - required to run virtual machines
-* VPC package does not limit VM count - in reality it depends on VM flavors used and total resources available within currently selected VPC package
-* Smallest available VPC resource package is Starter.Small, offering 10 vCPU cores, 20GB RAM and 200GB of storage - allowing to create up to 10 VMs (limited by vCPUs in this case)
-* VPC packages can be upgraded and downgraded at any moment
-* VPC packages are accounted daily - based on the price of the largest resource package that was selected on that day
-* Technically VPC represents Openstack Tenant (in one location)
+Service Store provides a common way to provision resources from both shared and private service providers.
 
-## Account registration and login
-Accepted user authentication methods are:
+The following resource types are offered at the moment:
 
-*  internal, password based accounts
-*  federated TAAT accounts (http://taat.edu.ee/)
+* Virtual Private Cloud (VPC) - a pool of resources dedicated to a particular organization.
+* Virtual Machines (requires pre-provisioned VPC) - a server with network connectivity for running customer payloads.
+* Block Devices (requires pre-provisioned VPC) - persistent volumes for storage of the data.
+* Batch (TBD) - access to Slurm-based processing farms.
+
+#### VPC Details
+* Virtual Private Cloud aka VPC is a compute service that allows to procure and manage a pool of virtualized infrastructure
+resources - like RAM, CPU, storage volumes and network resources - required to run virtual machines.
+* VPC package does not limit VM count - it depends on VM flavors used and total resources available in a chosen package.
+* VPC packages can be upgraded and downgraded at any moment.
+* VPC packages are accounted daily based on the price of the largest resource package that was selected during the day.
+
+## Accounts
+
+ETAIS self-service portal supports user accounts coming from [TaaT](http://taat.edu.ee) federated identity system,
+which allows to use home organisation accounts for login. Most of the larger education and research institutions in
+Estonia are connected to TaaT already.
+
+Alternatively, one can login using account from [eduGAIN](https://www.geant.org/Services/Trust_identity_and_security/eduGAIN).
+
 
 Self-Service Portal is available from: [https://minu.etais.ee](https://minu.etais.ee)
 
