@@ -190,4 +190,12 @@ Virtual Private Cloud resource package can be added by selecting "Resources" and
 
 ![Adding VM - step 9](images/project-vm-add-form-step9.png)
 
-### Security Groups management
+### VPC Security Groups management
+
+![Creating SecGroup - step 1](images/project-vpc-details.png)
+
+![Creating SecGroup - step 2](images/project-vpc-secgroups.png)
+
+![Creating SecGroup - step 3](images/project-vpc-secgroups-create.png)
+
+![Creating SecGroup - step 4](images/project-vpc-secgroups-form.png)
